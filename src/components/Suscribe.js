@@ -8,8 +8,9 @@ function Suscribe() {
 
 const HandleSubmit = (e) => {
     console.log('Email:', email)
+    
 };
-
+//mongodb+srv://rescoTFG:rescoTFG1234@tfg.1etzg.mongodb.net/<dbname>?retryWrites=true&w=majority
     return (
         <div style = {styleDiv}>
             <form style = {styleForm} onSubmit ={HandleSubmit}>
