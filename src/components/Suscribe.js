@@ -1,19 +1,46 @@
 import React from "react"
+import axios from 'axios'
+import { useHistory} from 'react-router-dom'
 
-function Suscribe() {
+
+
+
+
+function Suscribe(props) {
     const [name, setName] = React.useState("");
     const [email, setEmail] = React.useState("");
+    const [password, setPassword] = React.useState("");
     const [acceptedTerms, setAcceptedTerms] = React.useState(false);
 
+    const HandleSubmit = (e) => {
+        
+        console.log('Email:', email)
+        console.log('Acceptedterms:', acceptedTerms)
+        const userObject = {
+            email: email,
+            password: password,
+        };
+        console.log(userObject)
+        axios.post('http://localhost:4000/user', userObject)
+            .then((res) => {
+                if(res.data.status === "created") {
+                    console.log("hola")
+                    props.handleSuccessfulAuth(res.data)
 
-const HandleSubmit = (e) => {
-    console.log('Email:', email)
-    
-};
-//mongodb+srv://rescoTFG:rescoTFG1234@tfg.1etzg.mongodb.net/<dbname>?retryWrites=true&w=majority
+                }
+                
+            }).catch((error) => {
+                console.log(error)
+            });
+    };
+
+function validateLogin() {
+    return email.length > 0 && password.length > 0
+}
+
     return (
         <div style = {styleDiv}>
-            <form style = {styleForm} onSubmit ={HandleSubmit}>
+            <form style = {styleForm}>
                 <h1>Suscripcion para el simulador de phishing</h1>
                 <label>
                     Nombre:
@@ -24,7 +51,6 @@ const HandleSubmit = (e) => {
                         value = {name}
                         required />
                 </label>
-
                 <label>
                     Email:
                     <input style = {styleInput}
@@ -32,6 +58,15 @@ const HandleSubmit = (e) => {
                         type = "email"
                         onChange={e => setEmail(e.target.value)}
                         value = {email}
+                        required />
+                </label>
+                <label>
+                    Contraseña:
+                    <input style = {styleInput}
+                        name = "password"
+                        type = "password"
+                        onChange={e => setPassword(e.target.value)}
+                        value = {password}
                         required />
                 </label>
 
@@ -43,7 +78,7 @@ const HandleSubmit = (e) => {
                         onChange={e => setAcceptedTerms(e.target.value)}
                         required />
                 </label>
-                <button style={styleButton}>Submit</button>
+                <button type = "button" style={styleButton} disabled={!validateLogin()} onClick= {HandleSubmit}>Submit</button>
             </form>
         </div>
     )
