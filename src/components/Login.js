@@ -1,7 +1,7 @@
-import React from "react"
+import React, { useContext} from "react"
 import axios from 'axios'
 import { useHistory} from 'react-router-dom'
-
+import { UserContext } from "../context/UserContext";
 
 
 
@@ -9,6 +9,9 @@ import { useHistory} from 'react-router-dom'
 function Login() {
     const [email, setEmail] = React.useState("");
     const [password, setPassword] = React.useState("");
+    const { setUserName } = useContext(UserContext);
+    const { setUserEmail } = useContext(UserContext);
+    const { setIsLoggedIn } = useContext(UserContext);
     var history = useHistory()
 
     const HandleSubmit = (e) => {
@@ -19,13 +22,21 @@ function Login() {
             password: password
         };
         console.log(userObject)
-        axios.post('http://localhost:4000/session', userObject)
+        axios.post('http://localhost:4000/user/login', userObject)
             .then((res) => {
-                console.log(res.data)
+                console.log(res.data.usuario.name)
+                if(res.data.usuario.name !== undefined && res.data.usuario.password !== undefined) { 
+                    localStorage.setItem('userName', res.data.usuario.name);
+                    localStorage.setItem('userEmail', res.data.usuario.email);
+                    localStorage.setItem('isLoggedIn', "isLoggedIn")
+                    setUserName(res.data.usuario.name);
+                    setUserEmail(res.data.usuario.email);
+                    setIsLoggedIn("isLoggedIn");
+                }
             }).catch((error) => {
                 console.log(error)
             });
-            history.push('welcome')
+            history.push('/')
     };
 
 function validateLogin() {

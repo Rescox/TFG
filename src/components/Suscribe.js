@@ -1,34 +1,46 @@
-import React from "react"
+import React, {useContext} from "react"
 import axios from 'axios'
 import { useHistory} from 'react-router-dom'
+import { UserContext } from "../context/UserContext";
 
 
 
 
 
-function Suscribe(props) {
+
+function Suscribe() {
+    const { setUserName } = useContext(UserContext);
+    const { setUserEmail } = useContext(UserContext);
+    const { setIsLoggedIn } = useContext(UserContext);
+
     const [name, setName] = React.useState("");
     const [email, setEmail] = React.useState("");
     const [password, setPassword] = React.useState("");
     const [acceptedTerms, setAcceptedTerms] = React.useState(false);
-
+    var history = useHistory()
     const HandleSubmit = (e) => {
         
         console.log('Email:', email)
         console.log('Acceptedterms:', acceptedTerms)
         const userObject = {
             email: email,
+            name: name,
             password: password,
         };
         console.log(userObject)
         axios.post('http://localhost:4000/user', userObject)
             .then((res) => {
                 if(res.data.status === "created") {
-                    console.log("hola")
-                    props.handleSuccessfulAuth(res.data)
-
+                    localStorage.setItem('userName', name);
+                    localStorage.setItem('userEmail', email);
+                    localStorage.setItem('isLoggedIn', "isLoggedIn")
+                    setUserName(name);
+                    setUserEmail(email);
+                    setIsLoggedIn("isLoggedIn");
+                    
                 }
-                
+
+                history.push('/')
             }).catch((error) => {
                 console.log(error)
             });

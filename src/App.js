@@ -1,55 +1,77 @@
-import React, { Component } from 'react';
+import React, { useState, useMemo } from 'react';
 import { BrowserRouter as Router,  Route } from 'react-router-dom'
 import Header from './components/layout/Header';
 import Suscribe from './components/Suscribe';
 import About from './components/About';
 import Login from './components/Login';
 import Welcome from './components/Welcome';
+import Profile from './components/Profile'
+import GroupCampaign from './components/GroupCampaign';
 import './App.css';
+import { UserContext } from './context/UserContext';
 
-class App extends Component{
-  state = {
-    todos: []
-  }
-  constructor() {
-    super();
 
-    this.state = { 
-      loggedInStatus: "NOT_LOGGED",
-      user: {}
-    }
-    this.handleLogin = this.handleLogin.bind(this);
-  }
 
-  handleLogin(data) {
-    this.setState({
-      loggedInStatus: "LOGGED:_in",
-      user: data.user
-    })
+export default function App(){
+    const [userName, setUserName] = useState(localStorage.getItem('userName') || '');
+    const [userEmail, setUserEmail] = useState(localStorage.getItem('userEmail') || '');
+    const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem('isLoggedIn') || 'notLoggedIn');
+    const providerValue = useMemo(() => ({userName, setUserName, userEmail, setUserEmail, isLoggedIn, setIsLoggedIn}), [userName, setUserName, userEmail, setUserEmail, isLoggedIn, setIsLoggedIn])
+    
+
+  
+
+  function handleLogout() {
+    setUserName("");
+    setUserEmail("");
+    setIsLoggedIn("notLoggedIn");
   }
 
-  render() { 
+  if(isLoggedIn === 'notLoggedIn') { 
     return (
       <Router>
         <div className="App">
+        <UserContext.Provider value = {providerValue}>
           <div className="container">
-          <Header/>
+          <Header  handleLogout= {handleLogout} component={Header}/>
           </div>
           
             <div>
-            <Route exact path='/' render={props=> (
-              <Welcome {... props} handleLogin = {this.handleLogin} loggedInStatus={this.state.loggedInStatus}/>
-            )}>
-            </Route>
-            <Route exact path='/login' component={Login}></Route>
-            <Route exact path='/register' component={Suscribe}></Route>
-            <Route exact path='/about' component={About}></Route>
+              <Route exact path='/' render={props=> (
+                <Welcome {... props}/>
+              )}>
+              </Route>
+              
+              <Route exact path='/login'  component={Login}></Route>
+              <Route exact path='/register'  component={Suscribe}></Route>
+              <Route exact path='/about' component={About}></Route>
             </div>
+            </UserContext.Provider>
+        </div>
+      </Router>
+    );
+  }
+  else { 
+    return (
+      <Router>
+        <div className="App">
+        <UserContext.Provider value = {providerValue}>
+          <div className="container">
+          <Header  handleLogout= {handleLogout} component={Header}/>
+          </div>
           
+            <div>
+              <Route exact path='/' render={props=> (
+                <Welcome {... props} />
+              )}>
+              </Route>
+              <Route exact path='/about' component={About}></Route>
+              <Route exact path='/groupCampaign' component={GroupCampaign}></Route>
+              <Route exact path='/profile' component={Profile}></Route>
+            </div>
+            </UserContext.Provider>
         </div>
       </Router>
     );
   }
 }
-
-export default App;
