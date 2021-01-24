@@ -12,30 +12,50 @@ function Header(props) {
     if(isLoggedIn === 'notLoggedIn') { 
         return (
             <header style={headerStyle}>
-                <h1>PhishingSimulator</h1>
-                <Link style={linkStyle} to="/"> Home </Link>| <Link style={linkStyle} to="/login"> Login </Link> | <Link style={linkStyle} to="/register"> Register </Link>| <Link style={linkStyle} to="/about"> About </Link> 
+                <h1 style={headerStyleH1}>PhishingSimulator</h1>
+                <div style={divLinkStyle}>
+                    <Link style={linkStyle} to="/"> Home </Link> <Link style={linkStyle} to="/login"> Login </Link>  <Link style={linkStyle} to="/register"> Register </Link> <Link style={linkStyle} to="/about"> About </Link> 
+                </div>
             </header>
         )
     } else {
         return (
             <header style={headerStyle}>
-                <h1>PhishingSimulator</h1>
-        <Link style={linkStyle} to="/"> Home </Link>| <Link style={linkStyle} to="/about"> About </Link> | <Link to="/" onClick={props.handleLogout} style={linkStyle }>Logout</Link> | <Link to="/profile"  style={linkStyle }>Mi Perfil({userName})</Link>
+                <h1 style={headerStyleH1}>PhishingSimulator</h1>
+                <div style={divLinkStyle}> 
+                    <Link style={linkStyle} to="/"> Home </Link> <Link style={linkStyle} to="/about"> About </Link>  <Link to="/" onClick={props.handleLogout} style={linkStyle }>Logout</Link>  <Link to="/profile"  style={linkStyle }>My profile({userName})</Link>
+                </div>
             </header>
         )
     }
 }
 
+const divLinkStyle = {
+    textAlign: 'right',
+    margin: 'auto'
+}
+
+
 const linkStyle = {
-    color: '#fff',
-    textDecoration: 'none'
+    color: '#7FDBFF',
+    textDecoration: 'none',
+    fontSize: 'large',
+    marginRight: '30px'
 }
 
 const headerStyle = {
-    background: '#111',
-    color: '#fff',
+    background: '#001f3f',
+    color: '#7FDBFF',
     textAlign: 'center',
-    padding: '5px'
+    padding: '5px',
+    display: 'flex',
+    marginBottom: '50px'
 }
+const headerStyleH1 = {
+    display: 'block',
+    marginLeft: '30px',
+    width: '50%'
+}
+
 
 export default Header;

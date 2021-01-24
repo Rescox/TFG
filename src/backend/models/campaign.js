@@ -7,7 +7,9 @@ var campaign = mongoose.model('campaign',
     launchDate: {type: Date},
     endDate: {type: Date},
     state: {type: String},
-    creator: {type: String}
+    creator: {type: String},
+    template: {type: Array},
+    gophish_id: {type: Array}
 })
 
 module.exports = { campaign }

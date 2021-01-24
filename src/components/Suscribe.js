@@ -28,7 +28,7 @@ function Suscribe() {
             password: password,
         };
         console.log(userObject)
-        axios.post('http://localhost:4000/user', userObject)
+        axios.post('http://192.168.1.58:4000/user', userObject)
             .then((res) => {
                 if(res.data.status === "created") {
                     localStorage.setItem('userName', name);
@@ -53,9 +53,9 @@ function validateLogin() {
     return (
         <div style = {styleDiv}>
             <form style = {styleForm}>
-                <h1>Suscripcion para el simulador de phishing</h1>
+                <h1>Phishing simulator</h1>
                 <label>
-                    Nombre:
+                    Name:
                     <input style = {styleInput}
                         name = "name"
                         type = "text"
@@ -73,7 +73,7 @@ function validateLogin() {
                         required />
                 </label>
                 <label>
-                    Contraseña:
+                    Password:
                     <input style = {styleInput}
                         name = "password"
                         type = "password"
@@ -83,7 +83,7 @@ function validateLogin() {
                 </label>
 
                 <label>
-                    Acepte los terminos:
+                    Accept terms:
                     <input
                         name="acceptedTerms"
                         type="checkbox"
