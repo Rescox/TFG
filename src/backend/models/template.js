@@ -6,6 +6,7 @@ var template = mongoose.model('template',
     html: {type: String},
     creator: {type: String},
     gophish_id: {type: Number},
+    gophish_profile_id: {type: Number},
     status_usable: {type: Boolean}
 })
 

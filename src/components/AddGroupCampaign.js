@@ -57,16 +57,19 @@ function AddGroupCampaign() {
     { 
         name: "First Name",
         selector: "First Name",
+        center: true,
         sortable: true,
     }, 
     {    
         name: "Last Name",
         selector: "Last Name",
+        center: true,
         sortable: true
     },
     {    
         name: "Email",
         selector: "Email",
+        center: true,
         sortable: true
     },
     {   cell:(row) => <button onClick={() => {handleChange(row)}} id={row.id}><DeleteIcon/></button>,
@@ -135,8 +138,8 @@ function AddGroupCampaign() {
     const getTemplates = data =>{
         const list = []
         list.push({'id':1, 'name':'Twitter-Por Defecto'})
-        list.push({'id':3, 'name':'Google-Por Defecto'})
-        list.push({'id':4, 'name':'Spotify-Por Defecto'})
+        list.push({'id':4, 'name':'Google-Por Defecto'})
+        list.push({'id':3, 'name':'Spotify-Por Defecto'})
         for (let i = 0; i < data.length; i++) {
             if(data[i]['status_usable'] !== false) { 
                 const obj = {}

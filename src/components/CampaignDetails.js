@@ -1,7 +1,8 @@
 import React, {useState, useContext, useEffect} from "react"
 import DataTable from 'react-data-table-component';
-
+import Chart from "react-apexcharts";
 import axios from 'axios'
+import { Autorenew } from "@material-ui/icons";
 
 
 function CampaignDetails(props) {
@@ -10,6 +11,67 @@ function CampaignDetails(props) {
     const [data, setData] = useState([])
     const [columns, setColumns] = useState([])
 
+    const getColumnsName = () => {
+        let list = []
+        for(let i of columns.slice(2)) {
+            list.push(i.name)
+        }
+        console.log(list)
+        return list
+    }
+
+    const getDataCount = (sState) => {
+        console.log(data)
+        let list = []
+        for(let i of columns.slice(2)) {
+            list[i.name] = 0
+        }
+        for(let i of data) {
+            for(let j of Object.keys(list)) {
+                if(i[j] == sState) {
+                    list[j] = list[j] + 1
+                }
+            }
+        }
+
+        console.log(list)
+        return Object.values(list)
+    }
+
+    const graphState = {
+        options: {
+          chart: {
+            id: "basic-bar"
+          },
+          xaxis: {
+            categories: getColumnsName()
+          }
+        },
+        series: [
+          {
+            name: "series-1",
+            data: getDataCount('Email Sent')
+          }
+        ]
+    };
+
+    const graphStateEmailOpened = {
+        options: {
+          chart: {
+            id: "basic-bar"
+          },
+          xaxis: {
+            categories: getColumnsName()
+          }
+        },
+        series: [
+          {
+            name: "series-1",
+            data: getDataCount('Clicked Link')
+          }
+        ]
+    };
+    
     const list = []
     const columnList = []
     const getStatusCampaignDetails = (id) => {
@@ -41,11 +103,14 @@ function CampaignDetails(props) {
         }
     }
 
+    
 
     useEffect(() => { 
+        
         let column1 = { 
             name: "Nombre",
             selector: "firstName",
+            center: true,
             sortable: true,
             
         } 
@@ -53,6 +118,7 @@ function CampaignDetails(props) {
         let column2 = {    
             name: "Apellido",
             selector: "lastName",
+            center: true,
             sortable: true,
             
             
@@ -75,7 +141,6 @@ function CampaignDetails(props) {
             getStatusCampaignURL(res.data[0]['gophish_id'])
             setTimeout(() => {
                 setData(list)
-                console.log(columnList)
                 setColumns(columnList)
               }, 1000);
             
@@ -84,17 +149,55 @@ function CampaignDetails(props) {
         })
     }, []);
 
-
     return(
         <div>
             <h1>{title}</h1>
             <DataTable 
                 pagination
                 columns= {columns}  
-                data= {data}
-                       
+                data= {data}           
             />
-        </div>
+            <div style={graphicBars}>
+                <div style={graphicBarStyle1}>
+                    <h2>Emails Sent but not open</h2>
+                    <Chart
+                        options={graphState.options}
+                        series={graphState.series}
+                        type="bar"
+                        width="500"
+                        center
+                    />
+                </div>
+                <div style={graphicBarStyle2}>
+                    <h2>Emails Opened and clicked on link</h2>
+                    <Chart
+                        options={graphStateEmailOpened.options}
+                        series={graphStateEmailOpened.series}
+                        type="bar"
+                        width="500"
+                        center
+                    />
+                </div>
+            </div>
+            
+            
+        </div> 
     )
+}
+const graphicBars = {
+    display: 'flex',
+    width: '100%'
+}
+
+const graphicBarStyle1 = {
+    marginLeft: '15em',
+    float: 'left',
+    paddingRight: '10em'
+}
+
+const graphicBarStyle2 = {
+    float: 'left',
+    marginLeft: '15em',
+    paddingRight: '10em'
 }
 export default CampaignDetails;

@@ -59,21 +59,25 @@ function AddSmsGroupCampaign() {
     { 
         name: "First Name",
         selector: "First Name",
+        center: true,
         sortable: true,
     }, 
     {    
         name: "Last Name",
         selector: "Last Name",
+        center: true,
         sortable: true
     },
     {    
         name: "Telephone",
         selector: "Telephone",
+        center: true,
         sortable: true
     },
     {   cell:(row) => <button onClick={() => {handleChange(row)}} id={row.id}><DeleteIcon/></button>,
         ignoreRowClick: true,
         allowOverflow: true,
+        center: true,
         button: true,
     }
 ];

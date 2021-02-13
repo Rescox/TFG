@@ -95,9 +95,9 @@ function AddIndividualCampaign() {
     return (
         <div style = {styleDiv}>
             <form style = {styleForm}>
-                <h1>Suscripcion para el simulador de phishing</h1>
+                <h1>Individual campaign</h1>
                 <label>
-                    Nombre de la campaña:
+                    Campaign name:
                     <input style = {styleInput}
                         name = "campaignName"
                         type = "text"
@@ -107,7 +107,7 @@ function AddIndividualCampaign() {
                     />
                 </label>
                 <label>
-                    Plantillas:
+                    Templates:
                     <select style= {selectStyle} onChange= {handleSelect}>
                         { templateUrl.map( (name, id) => (
                         <option key= {id} value={JSON.stringify(name)} >{JSON.stringify(name.name)}</option>
@@ -122,7 +122,7 @@ function AddIndividualCampaign() {
                     </ul>
                 </label>
                 <label>
-                    Nombre:
+                    Your First Name:
                     <input style = {styleInput}
                         name = "firstName"
                         type = "text"
@@ -132,7 +132,7 @@ function AddIndividualCampaign() {
                     />
                 </label>
                 <label>
-                    Apellidos:
+                    Your Last Name:
                     <input style = {styleInput}
                         name = "launchDate"
                         type = "text"
@@ -142,7 +142,7 @@ function AddIndividualCampaign() {
                     />
                 </label>
                 <label>
-                    Fecha de inicio:
+                    Launch date:
                     <input style = {styleInput}
                         name = "launchDate"
                         type = "date"
@@ -152,7 +152,7 @@ function AddIndividualCampaign() {
                     />
                 </label>
                 <label>
-                    Fecha de finalización:
+                    End date:
                     <input style = {styleInput}
                         name = "finishDate"
                         type = "date"
@@ -162,7 +162,7 @@ function AddIndividualCampaign() {
                     />
                 </label>
                 
-                <button type = "button" style={styleButton} onClick={handleSubmit}>Añadir</button>
+                <button type = "button" style={styleButton} onClick={handleSubmit}>Add</button>
             </form>
         </div>
     )

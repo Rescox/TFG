@@ -14,45 +14,60 @@ function Profile() {
             omit: true
         }, 
         { 
-            name: "Nombre de la campaña",
+            name: "Campaign Name",
             selector: "name",
+            responsive: true,
+            center: true,
             sortable: true,
         }, 
         {    
-            name: "Fecha de inicio",
+            name: "Launch Date",
             selector: "date",
+            responsive: true,
+            center: true,
             sortable: true
         },
         {    
-            name: "Numero de personas",
+            name: "Number of Peoople",
             selector: "number_of_people",
+            center: true,
+            responsive: true,
             sortable: true
         },
         {   cell:(row) => <button onClick={handleChange} id={row.id}>Detalles</button>,
             ignoreRowClick: true,
             allowOverflow: true,
+            responsive: true,
             button: true,
         }
     ];
 
     const columnsSms = [ { 
         selector: "id",
-        omit: true
+        omit: true,
+        
     }, 
     { 
-        name: "Nombre de la campaña",
+        name: "Campaign Name",
         selector: "name",
         sortable: true,
+        center: true,
+        responsive: true
+
     }, 
     {    
-        name: "Numero de personas",
+        name: "Number of people",
         selector: "number_of_people",
-        sortable: true
+        sortable: true,
+        center: true,
+        responsive: true
+
     },
     {   cell:(row) => <button onClick={handleChange} id={row.id}>Detalles</button>,
         ignoreRowClick: true,
         allowOverflow: true,
         button: true,
+        responsive: true
     }
 ];
     

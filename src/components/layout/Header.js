@@ -23,7 +23,7 @@ function Header(props) {
             <header style={headerStyle}>
                 <h1 style={headerStyleH1}>PhishingSimulator</h1>
                 <div style={divLinkStyle}> 
-                    <Link style={linkStyle} to="/"> Home </Link> <Link style={linkStyle} to="/about"> About </Link>  <Link to="/" onClick={props.handleLogout} style={linkStyle }>Logout</Link>  <Link to="/profile"  style={linkStyle }>My profile({userName})</Link>
+                    <Link style={linkStyle} to="/"> Home </Link> <Link style={linkStyle} to="/about"> About </Link>  <Link to="/" onClick={props.handleLogout} style={linkStyle }>Logout</Link>  <Link to="/profile"  style={linkStyle }>Profile({userName})</Link>
                 </div>
             </header>
         )
@@ -31,7 +31,6 @@ function Header(props) {
 }
 
 const divLinkStyle = {
-    textAlign: 'right',
     margin: 'auto'
 }
 
@@ -39,22 +38,21 @@ const divLinkStyle = {
 const linkStyle = {
     color: '#7FDBFF',
     textDecoration: 'none',
-    fontSize: 'large',
-    marginRight: '30px'
+    margin: '50px',
+    
 }
 
 const headerStyle = {
     background: '#001f3f',
     color: '#7FDBFF',
-    textAlign: 'center',
-    padding: '5px',
-    display: 'flex',
-    marginBottom: '50px'
+    position: 'relative',
+    padding: '10px',
+    paddingBottom: '20px'
+    
 }
 const headerStyleH1 = {
     display: 'block',
-    marginLeft: '30px',
-    width: '50%'
+    
 }
 
 

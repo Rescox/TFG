@@ -25,7 +25,8 @@ router.post('/', (req,res)=> {
         html: req.body.html,
         creator: req.body.creator,
         status_usable: false,
-        gophish_id: 0
+        gophish_id: 0,
+        gophish_profile_id: 0
     })
     
     newTemplate.save((err,docs)=> {
@@ -42,7 +43,8 @@ router.put('/:id', (req,res)=> {
         html: req.body.html,
         creator: req.body.creator,
         gophish_id: req.body.gophish_id,
-        status_usable: req.body.status_usable
+        status_usable: req.body.status_usable,
+        gophish_profile_id: req.body.gophish_profile_id
     }
     template.findByIdAndUpdate(req.params.id,{$set:updatedTemplate}, (err, docs) => {
         if(!err) res.send(docs)
