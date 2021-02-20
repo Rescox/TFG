@@ -200,7 +200,6 @@ function AddGroupCampaign() {
 
     const handleValueLi = e => {
         const obj = JSON.parse(e)
-        console.log(obj.id)
         return obj.name
     }
 
@@ -300,7 +299,7 @@ function AddGroupCampaign() {
                             required
                         />
                     </label>
-                    <button type = "button" style={styleAddButton} onClick={handleAddRowSubmit}>Add person</button>
+                    <button type = "button" style={styleAddButton} onClick={handleAddRowSubmit}>Add person to the campaign</button>
                     <label> Upload a .csv file with the people that will participate
                         <input style = {styleFileInput} 
                         onChange={handleFileUpload}
@@ -359,14 +358,14 @@ const styleAddButton = {
     display: 'flex',
     margin: 'auto',
     border: '1px solid #ccc',
-    marginTop: '6px', 
+    marginTop: '20px', 
     color: '#000000',
     background:'#7F7fbb',
     borderRadius: '12px',
     fontWeight: 'bold',
     cursor: 'pointer',
     margin: 'auto',
-    marginBottom: '10px'
+    marginBottom: '20px'
 }
 
 const styleInput = {
@@ -376,7 +375,7 @@ const styleInput = {
     borderRadius: '4px',
     boxSizing: 'border-box',  
     marginTop: '6px', 
-    marginBottom: '16px' 
+    marginBottom: '20px' 
 }
 
 const styleFileInput = {
@@ -387,6 +386,7 @@ const styleFileInput = {
     borderRadius: '4px',
     boxSizing: 'border-box',  
     margin: 'auto',
+    marginTop: '20px'
 }
 
 const styleButton = {

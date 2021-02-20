@@ -35,6 +35,7 @@ router.post('/', (req,res)=> {
         group: req.body.group,
         state: req.body.state,
         creator: req.body.creator,
+        launchDate: req.body.launchDate,
         body: req.body.body
     })
     
@@ -52,7 +53,8 @@ router.put('/:id', (req,res)=> {
         group: req.body.group,
         state: req.body.state,
         creator: req.body.creator,
-        body: req.body.body
+        body: req.body.body,
+        launchDate: req.body.launchDate,
     }
     console.log(req.body.gophish_id)
     console.log(req.body)

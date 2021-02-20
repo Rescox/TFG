@@ -110,28 +110,41 @@ function AddSmsGroupCampaign() {
 
     const handleSubmit = e => {
         console.log(data)
-        const smsObject = {
-            name: campaignName,
-            body: body,
-            group: data,
-            state: "Created",
-            creator: userEmail
-        };
-        axios.post('http://localhost:4000/sms', smsObject)
-            .then((res) => {
-                console.log(res)
-            }).catch((error) => {
-                console.log(error)
-            });
-            history.push('/profile')
-        
+        if(campaignName.length === 0) {
+            alert("Introduzca al nombre de la campaña");
+        } else if(body.length === 0) {
+            alert("Introduzca el cuerpo del SMS");
+        } else if(data.length === 0) {
+            alert("Introduzca al menos un usuario para realizar la campaña");
+        } else { 
+            const smsObject = {
+                name: campaignName,
+                body: body,
+                group: data,
+                launchDate: Date().toLocaleString(),
+                state: "Created",
+                creator: userEmail
+            };
+            axios.post('http://localhost:4000/sms', smsObject)
+                .then((res) => {
+                    console.log(res)
+                }).catch((error) => {
+                    console.log(error)
+                });
+                history.push('/profile')
+        }
     }
 
     const handleAddRowSubmit = e => {
-        const newData = [...data]
-        newData.push(newUser)
-        setData(newData)
-        console.log(data)
+        console.log(newUser)
+        if(newUser['First Name'] === "" || newUser['Last Name'] === "" || newUser['Telephone'] === "" || newUser['First Name'] === undefined || newUser['Last Name'] === undefined || newUser['Telephone'] === undefined) {
+            alert("Complete los tres campos del nuevo usuario")
+        } else { 
+            const newData = [...data]
+            newData.push(newUser)
+            setData(newData)
+            console.log(data)
+        }
     }
 
     const set = name =>  {
@@ -201,7 +214,7 @@ function AddSmsGroupCampaign() {
                         />
                     </label>
                     
-                    <button type = "button" style={styleAddButton} onClick={handleAddRowSubmit}>Add person</button>
+                    <button type = "button" style={styleAddButton} onClick={handleAddRowSubmit}>Add person to the campaign</button>
                     <label> Upload a .csv file with the people that will participate
                     <input style = {styleFileInput} 
                         onChange={handleFileUpload}
@@ -268,6 +281,7 @@ const styleFileInput = {
     borderRadius: '4px',
     boxSizing: 'border-box',  
     margin: 'auto',
+    marginTop: '20px'
 }
 
 const styleAddButton = {
@@ -276,13 +290,13 @@ const styleAddButton = {
     display: 'flex',
     margin: 'auto',
     border: '1px solid #ccc',
-    marginTop: '6px', 
+    marginTop: '20px', 
     color: '#000000',
     background:'#7F7fbb',
     borderRadius: '12px',
     fontWeight: 'bold',
     cursor: 'pointer',
-    marginBottom: '10px'
+    marginBottom: '20px'
 }
 
 const styleInput = {

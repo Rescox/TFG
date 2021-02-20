@@ -18,11 +18,7 @@ function UserInfo() {
                 <h2>Phishing by SMS</h2>
                 <div style={styleButtonGroup} className="buttonGroup">
                     <button style={styleButton} onClick= {() => {history.push('/SmsGroupCampaign')}}>Send SMS</button>
-                </div>  
-                <h2>Phishing by Telegram</h2>
-                <div style={styleButtonGroup} className="buttonGroup">
-                    <button style={styleButton} onClick= {() => {history.push('/SmsGroupCampaign')}}>Send Telegram (pendiente)</button>
-                </div>      
+                </div>     
             </div>
         )
     } else {

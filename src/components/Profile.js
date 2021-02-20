@@ -65,6 +65,13 @@ function Profile() {
 
     }, 
     {    
+        name: "Launch Date",
+        selector: "date",
+        responsive: true,
+        center: true,
+        sortable: true
+    },
+    {    
         name: "Number of people",
         selector: "number_of_people",
         sortable: true,
@@ -109,6 +116,7 @@ function Profile() {
             const obj = {}
             obj['id'] = data[i]['_id']
             obj['name'] = data[i]['name'];
+            obj['date'] = data[i]['launchDate'];
             obj['number_of_people'] = data[i]['group'].length;
             list.push(obj)
         }
