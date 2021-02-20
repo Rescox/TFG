@@ -90,6 +90,7 @@ function AddSmsGroupCampaign() {
         console.log(data);
     };
     
+    
 
     const handleFileUpload = e => {
         
@@ -158,7 +159,7 @@ function AddSmsGroupCampaign() {
                     <textarea rows="20" cols="70" onChange={e => setBody(e.target.value)}  value={body} />
                 </label>
                     <p  style={pHelpStyle}>* Introduzca en esta caja de texto las constantes {fn}  y {ln} para sustituirlo por el nombre y apellidos de cada usuario respectivamente.</p>
-                <button type = "button" style={styleButton} onClick={handleSubmit}>Add</button>
+                <button type = "button" style={styleButton} onClick={handleSubmit}>Add campaign</button>
             </form>
             <DataTable
                 pagination
@@ -277,7 +278,7 @@ const styleAddButton = {
     border: '1px solid #ccc',
     marginTop: '6px', 
     color: '#000000',
-    background:'#01FF70',
+    background:'#7F7fbb',
     borderRadius: '12px',
     fontWeight: 'bold',
     cursor: 'pointer',

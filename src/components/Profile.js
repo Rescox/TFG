@@ -3,6 +3,7 @@ import DataTable from 'react-data-table-component';
 import axios from 'axios'
 import { UserContext } from "../context/UserContext";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import  DeleteIcon  from '@material-ui/icons/Delete';
 
 function Profile() {
     const { userEmail} = useContext(UserContext);   
@@ -34,7 +35,15 @@ function Profile() {
             responsive: true,
             sortable: true
         },
-        {   cell:(row) => <button onClick={handleChange} id={row.id}>Detalles</button>,
+        {   
+            cell:(row) => <button onClick={handleChange} id={row.id}>Detalles</button>,
+            ignoreRowClick: true,
+            allowOverflow: true,
+            responsive: true,
+            button: true,
+        },
+        {   
+            cell:(row) => <button onClick={handleDelete} id={row.id}><DeleteIcon/></button>,
             ignoreRowClick: true,
             allowOverflow: true,
             responsive: true,
@@ -68,6 +77,13 @@ function Profile() {
         allowOverflow: true,
         button: true,
         responsive: true
+    },
+    {   
+        cell:(row) => <button onClick={handleDeleteSms} id={row.id}><DeleteIcon/></button>,
+        ignoreRowClick: true,
+        allowOverflow: true,
+        responsive: true,
+        button: true,
     }
 ];
     
@@ -121,6 +137,32 @@ function Profile() {
         history.push('/Profile/' + state.target.id);
 
         console.log('Selected Rows: ', state.target.id);
+    };
+
+    const handleDelete = (state) => {
+        var filtered =data.filter(data => data.id != state.currentTarget.id)
+        setData(filtered)
+        const URL = "http://localhost:4000/campaign/" + state.currentTarget.id
+        axios.delete(URL)
+        .then(res => { 
+            console.log(res)
+
+        }).catch((error) => {
+            console.log(error)
+        });
+    };
+
+    const handleDeleteSms = (state) => {
+        var filtered =dataSms.filter(dataSms => dataSms.id != state.currentTarget.id)
+        setDataSms(filtered)
+        const URL = "http://localhost:4000/sms/" + state.currentTarget.id
+        axios.delete(URL)
+        .then(res => { 
+            console.log(res)
+
+        }).catch((error) => {
+            console.log(error)
+        });
     };
 
     return (

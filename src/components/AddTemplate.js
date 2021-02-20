@@ -101,7 +101,7 @@ function AddTemplate() {
                     explicabo nemo nam libero ad, doloribus, voluptas rem alias. Vitae?
                     </div>
                 </Popup>
-                <button type = "button" style={styleButton} onClick={handleSubmit}>Add</button>
+                <button type = "button" style={styleButton} onClick={handleSubmit}>Add template</button>
             </form>
         </div>
     )
@@ -130,18 +130,6 @@ const modalContent = {
 
 }
 
-const modalClose = {
-    position: 'absolute',
-    display: 'block',
-    padding: '2px 5px',
-    lineHeight: '20px',
-    right: '-10px',
-    top: '-10px',
-    fontSize: '24px',
-    background: '#ffffff',
-    borderRadius: '18px',
-    border: '1px solid #cfcece'
-  }
 
 const styleForm = {
     display: 'inline-block',
@@ -174,6 +162,11 @@ const styleButton = {
     padding: '12px', 
     border: '1px solid #ccc',
     marginTop: '6px', 
+    color: '#000000',
+    background:'#7FDBFF',
+    borderRadius: '12px',
+    fontWeight: 'bold',
+    cursor: 'pointer',
 }
 
 export default AddTemplate;

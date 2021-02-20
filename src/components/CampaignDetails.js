@@ -16,12 +16,12 @@ function CampaignDetails(props) {
         for(let i of columns.slice(2)) {
             list.push(i.name)
         }
-        console.log(list)
+        
         return list
     }
 
     const getDataCount = (sState) => {
-        console.log(data)
+        
         let list = []
         for(let i of columns.slice(2)) {
             list[i.name] = 0

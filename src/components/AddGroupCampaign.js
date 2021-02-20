@@ -105,8 +105,18 @@ function AddGroupCampaign() {
     }
 
     const handleSubmit = e => {
-        if(launchDate > endDate) {
-            alert("Fecha de lanzamiento mayor que la de finalización")
+        if (launchDate > endDate) {
+            alert("Fecha de lanzamiento mayor que la de finalización");
+        } else if (campaignName.length == 0) {
+            alert("Introduzca el nombre de la campaña");
+        } else if (launchDate.length == 0) {
+            alert("Introduzca la fecha de inicio");
+        } else if (endDate.length == 0) {
+            alert("Introduzca la fecha de fin");
+        } else if (template.length == 0) {
+            alert("Introduzca al menos una plantilla ");
+        } else if (data.length == 0) {
+            alert("Introduzca al menos un usuario ");
         } else { 
             console.log(data)
             const campaignObject = {
@@ -129,10 +139,18 @@ function AddGroupCampaign() {
     }
 
     const handleAddRowSubmit = e => {
-        const newData = [...data]
-        newData.push(newUser)
-        setData(newData)
-        console.log(data)
+        console.log(newUser)
+        
+       
+
+        if(newUser['First Name'] === "" || newUser['Last Name']=== "" || newUser['Email']=== "" || newUser['First Name'] === undefined || newUser['Last Name']=== undefined || newUser['Email']=== undefined) {
+            alert("Introduzca todos los campos de usuario");
+        } else { 
+            const newData = [...data]
+            newData.push(newUser)
+            setData(newData)
+            console.log(data)
+        }
     }
 
     const getTemplates = data =>{
@@ -241,7 +259,7 @@ function AddGroupCampaign() {
                         required
                     />
                 </label>
-                <button type = "button" style={styleButton} onClick={handleSubmit}>Añadir</button>
+                <button type = "button" style={styleButton} onClick={handleSubmit}>Add campaign</button>
             </form>
             <DataTable
                 pagination
@@ -343,7 +361,7 @@ const styleAddButton = {
     border: '1px solid #ccc',
     marginTop: '6px', 
     color: '#000000',
-    background:'#01FF70',
+    background:'#7F7fbb',
     borderRadius: '12px',
     fontWeight: 'bold',
     cursor: 'pointer',

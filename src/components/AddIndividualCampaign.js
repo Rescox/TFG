@@ -21,24 +21,44 @@ function AddIndividualCampaign() {
     var history = useHistory()   
 
     const handleSubmit = e => {
+        console.log(firstName)
+        if(campaignName.length === 0) {
+            alert("Introduzca el nombre de la campaña");
+        } 
+        else if( firstName.length === 0) {
+            alert("Introduzca su nombre");
+        }
+        else if( lastName.length === 0) {
+            alert("Introduzca su apellido");
+        }
+        else if( template.length === 0) {
+            alert("Introduzca al menos una plantilla");
+        }
+        else if( launchDate.length === 0) {
+            alert("Introduzca la fecha de comienzo");
+        } 
+        else if( endDate.length === 0) {
+            alert("Introduzca la fecha de finalizacion");
+        } else { 
         const data = {'First Name': firstName, 'Last Name': lastName, 'Email': userEmail}
         
-        const campaignObject = {
-            name: campaignName,
-            launchDate: launchDate,
-            endDate: endDate,
-            template: template,
-            group: data,
-            state: "Created",
-            creator: userEmail
-        };
-        axios.post('http://localhost:4000/campaign', campaignObject)
-            .then((res) => {
-                console.log(res)
-            }).catch((error) => {
-                console.log(error)
-            });
-            history.push('/profile')
+            const campaignObject = {
+                name: campaignName,
+                launchDate: launchDate,
+                endDate: endDate,
+                template: template,
+                group: data,
+                state: "Created",
+                creator: userEmail
+            };
+            axios.post('http://localhost:4000/campaign', campaignObject)
+                .then((res) => {
+                    console.log(res)
+                }).catch((error) => {
+                    console.log(error)
+                });
+                history.push('/profile')
+        }
     }
 
     const getTemplates = data =>{
@@ -162,7 +182,7 @@ function AddIndividualCampaign() {
                     />
                 </label>
                 
-                <button type = "button" style={styleButton} onClick={handleSubmit}>Add</button>
+                <button type = "button" style={styleButton} onClick={handleSubmit}>Add campaign</button>
             </form>
         </div>
     )
