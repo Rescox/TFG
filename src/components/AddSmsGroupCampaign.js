@@ -17,7 +17,7 @@ function AddSmsGroupCampaign() {
     const ln = "{.LastName}"
     
     
-    const [newUser, setNewUser] = useState([{'First Name': " ", 'Last Name': " ", 'Telephone': " "}])
+    const [newUser, setNewUser] = useState([])
     const { userEmail} = useContext(UserContext);    
     
     var history = useHistory()
@@ -136,10 +136,11 @@ function AddSmsGroupCampaign() {
     }
 
     const handleAddRowSubmit = e => {
-        console.log(newUser)
         if(newUser['First Name'] === "" || newUser['Last Name'] === "" || newUser['Telephone'] === "" || newUser['First Name'] === undefined || newUser['Last Name'] === undefined || newUser['Telephone'] === undefined) {
             alert("Complete los tres campos del nuevo usuario")
         } else { 
+            newUser['SMS State'] = 'In Progress'
+            console.log(newUser)
             const newData = [...data]
             newData.push(newUser)
             setData(newData)

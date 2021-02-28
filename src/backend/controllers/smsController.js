@@ -14,8 +14,7 @@ router.get('/',(req,res)=> {
 router.get('/details/:id',(req,res)=> {
     sms.find({'_id': req.params.id},(err,docs)=> {
         if(err) res.send(err);
-        else {
-            console.log(docs) 
+        else { 
             res.send(docs);
         }
     })
@@ -45,6 +44,25 @@ router.post('/', (req,res)=> {
     })
 })
 
+router.put('/details/:id', (req,res)=> {
+    if(!ObjectID.isValid(req.params.id))
+        return res.status(400).send('No sms found with that id')
+        console.log(req.body[0].name);
+    var updatedSms = {
+        name: req.body[0].name,
+        group: req.body[0].group,
+        state: req.body[0].state,
+        creator: req.body[0].creator,
+        body: req.body[0].body,
+        launchDate: req.body[0].launchDate,
+    }
+    console.log(updatedSms)
+    sms.findByIdAndUpdate(req.params.id,{$set:updatedSms}, (err, docs) => {
+        if(!err) res.send(docs)
+        else console.log("ERROR en put")
+    })
+})
+
 router.put('/:id', (req,res)=> {
     if(!ObjectID.isValid(req.params.id))
         return res.status(400).send('No sms found with that id')
@@ -56,8 +74,7 @@ router.put('/:id', (req,res)=> {
         body: req.body.body,
         launchDate: req.body.launchDate,
     }
-    console.log(req.body.gophish_id)
-    console.log(req.body)
+    console.log(updatedSms)
     sms.findByIdAndUpdate(req.params.id,{$set:updatedSms}, (err, docs) => {
         if(!err) res.send(docs)
         else console.log("ERROR en put")
