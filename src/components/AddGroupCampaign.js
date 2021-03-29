@@ -107,15 +107,15 @@ function AddGroupCampaign() {
     const handleSubmit = e => {
         if (launchDate > endDate) {
             alert("Fecha de lanzamiento mayor que la de finalización");
-        } else if (campaignName.length == 0) {
+        } else if (campaignName.length === 0) {
             alert("Introduzca el nombre de la campaña");
-        } else if (launchDate.length == 0) {
+        } else if (launchDate.length === 0) {
             alert("Introduzca la fecha de inicio");
-        } else if (endDate.length == 0) {
+        } else if (endDate.length === 0) {
             alert("Introduzca la fecha de fin");
-        } else if (template.length == 0) {
+        } else if (template.length === 0) {
             alert("Introduzca al menos una plantilla ");
-        } else if (data.length == 0) {
+        } else if (data.length === 0) {
             alert("Introduzca al menos un usuario ");
         } else { 
             console.log(data)
@@ -364,7 +364,6 @@ const styleAddButton = {
     borderRadius: '12px',
     fontWeight: 'bold',
     cursor: 'pointer',
-    margin: 'auto',
     marginBottom: '20px'
 }
 

@@ -4,7 +4,7 @@ import Chart from "react-apexcharts";
 import axios from 'axios'
 
 
-function CampaignDetails(props) {
+function CampaignDetailsSMS(props) {
     const {campaign_id} = props.match.params;
     const [title, setTitle] = useState([])
     const [data, setData] = useState([])
@@ -73,34 +73,10 @@ function CampaignDetails(props) {
     
     const list = []
     const columnList = []
-    const getStatusCampaignDetails = (id) => {
-        let template = {
-            name: id.template.name,
-            selector: id.template.name,
-            sortable: true
-        }
-        
-        columnList.push(template)
-        
-        
-        for(let i of id.results) {
-            const obj = list.find(x => x.email === i.email);
-            obj[id.template.name] = i.status            
-        }
-    }
+    
 
     //192.168.1.34:3333/api/campaigns/92?api_key=ea2c3b73d56626bcb7e50367e23b1d111966d722cc0ceb29c764df2c260488c3
-    const getStatusCampaignURL = (id) => { 
-        for (let value of id) {
-            let url = "https://192.168.1.34:3333/api/campaigns/" + value + "?api_key=ea2c3b73d56626bcb7e50367e23b1d111966d722cc0ceb29c764df2c260488c3"; 
-            axios.get(url)
-            .then((res) => {
-                getStatusCampaignDetails(res.data)
-            }).catch((error) => {
-                console.log(error)
-            })
-        }
-    }
+    
 
     
 
@@ -111,33 +87,38 @@ function CampaignDetails(props) {
             selector: "firstName",
             center: true,
             sortable: true,
-            
         } 
 
         let column2 = {    
             name: "Apellido",
             selector: "lastName",
             center: true,
+            sortable: true,  
+        }
+
+        let column3 = {    
+            name: "State",
+            selector: "state",
+            center: true,
             sortable: true,
-            
-            
         }
         
         columnList.push(column1)
         columnList.push(column2)
-        const url = 'http://localhost:4000/campaign/details/'+ campaign_id
+        columnList.push(column3)
+        const url = 'http://localhost:4000/sms/details/'+ campaign_id
         axios.get(url)
         .then((res) => {
+            console.log(res);
             setTitle(res.data[0]['name'])
             for(let i in res.data[0]['group']) {
                 const obj = {}
                 obj['firstName'] = res.data[0]['group'][i]['First Name']
                 obj['lastName'] = res.data[0]['group'][i]['Last Name']
-                obj['email'] = res.data[0]['group'][i]['Email']
+                obj['telephone'] = res.data[0]['group'][i]['Telephone']
+                obj['state'] = res.data[0]['group'][i]['SMS State']
                 list.push(obj);
             }
-
-            getStatusCampaignURL(res.data[0]['gophish_id'])
             setTimeout(() => {
                 setData(list)
                 setColumns(columnList)
@@ -199,4 +180,4 @@ const graphicBarStyle2 = {
     marginLeft: '15em',
     paddingRight: '10em'
 }
-export default CampaignDetails;
+export default CampaignDetailsSMS;

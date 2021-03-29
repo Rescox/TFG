@@ -30,6 +30,7 @@ router.get('/:email',(req,res)=> {
 })
 
 router.post('/', (req,res)=> {
+    console.log(req.body);
     var newCampaign = new campaign({
         name: req.body.name,
         group: req.body.group,

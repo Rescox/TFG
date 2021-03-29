@@ -79,7 +79,7 @@ function Profile() {
         responsive: true
 
     },
-    {   cell:(row) => <button onClick={handleChange} id={row.id}>Detalles</button>,
+    {   cell:(row) => <button onClick={handleChangeSMS} id={row.id}>Detalles</button>,
         ignoreRowClick: true,
         allowOverflow: true,
         button: true,
@@ -147,8 +147,14 @@ function Profile() {
         console.log('Selected Rows: ', state.target.id);
     };
 
+    const handleChangeSMS = (state) => {
+        history.push('/Profile/sms/' + state.target.id);
+
+        console.log('Selected Rows: ', state.target.id);
+    };
+
     const handleDelete = (state) => {
-        var filtered =data.filter(data => data.id != state.currentTarget.id)
+        var filtered =data.filter(data => data.id !== state.currentTarget.id)
         setData(filtered)
         const URL = "http://localhost:4000/campaign/" + state.currentTarget.id
         axios.delete(URL)
@@ -191,7 +197,7 @@ function Profile() {
                 data={dataSms}
                 columns= {columnsSms}  
                 Clicked
-                onRowSelected={handleChange}            
+                onRowSelected={handleChangeSMS}            
             />
         </div>
     )

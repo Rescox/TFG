@@ -93,12 +93,14 @@ function AddTemplate() {
                     3. Una vez abierto, en la parte de la URL, nos aparecerá algo parecido a esto: https://mail.google.com/mail/u/0?ik=??&view=om&permmsgid=msg-f%??
                     <br />
                     <br />
-                    En el parametro view=om, cambiamos om por lg, para obtener el HTML con el que podremos clonar dicho correo.
+                    4. En el parametro view=om, cambiamos om por lg, para obtener el HTML con el que podremos clonar dicho correo.
                     <br />
                     <br />
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur sit
-                    commodi beatae optio voluptatum sed eius cumque, delectus saepe repudiandae
-                    explicabo nemo nam libero ad, doloribus, voluptas rem alias. Vitae?
+                    5. Ahora simplemente pulsaremos Click derecho e inspeccionar elementos, copiamos todo el contenido y lo pegamos en la caja de texto de esta página.
+                    <br />
+                    <br />
+                    6. En las partes del código dónde aparezcan nombres o apellidos debería sustituirlo por las variables .FirstName y .LastName,
+                    y en cualquier link por la variable .URL
                     </div>
                 </Popup>
                 <button type = "button" style={styleButton} onClick={handleSubmit}>Add template</button>

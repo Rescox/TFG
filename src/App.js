@@ -9,6 +9,9 @@ import Profile from './components/Profile'
 import AddGroupCampaign from './components/AddGroupCampaign';
 import AddTemplate from './components/AddTemplate';
 import CampaignDetails from './components/CampaignDetails'
+import CampaignDetailsSMS from './components/CampaignDetailsSMS'
+import ConfirmationEmail from './components/ConfirmationEmail'
+
 import './App.css';
 import { UserContext } from './context/UserContext';
 import AddIndividualCampaign from './components/AddIndividualCampaign';
@@ -76,6 +79,9 @@ export default function App(){
               <Route exact path='/template' component={AddTemplate}></Route>
               <Route exact path='/profile' component={Profile}></Route>
               <Route exact path='/profile/:campaign_id' component={CampaignDetails}></Route>
+              <Route exact path='/profile/sms/:campaign_id' component={CampaignDetailsSMS}></Route>
+              <Route exact path='/verification/:confirmationCode' component={ConfirmationEmail}></Route>
+
             </div>
             </UserContext.Provider>
         </div>

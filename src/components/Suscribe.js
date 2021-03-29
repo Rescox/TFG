@@ -2,10 +2,8 @@ import React, {useContext} from "react"
 import axios from 'axios'
 import { useHistory} from 'react-router-dom'
 import { UserContext } from "../context/UserContext";
-
-
-
-
+import {createToken} from "../backend/services/Authservice";
+import {sendConfirmationEmail} from "../backend/services/nodemailerService"
 
 
 function Suscribe() {
@@ -22,15 +20,19 @@ function Suscribe() {
         
         console.log('Email:', email)
         console.log('Acceptedterms:', acceptedTerms)
+        let token = createToken();
         const userObject = {
             email: email,
             name: name,
             password: password,
+            status: 'Pending',
+            token: token,
         };
         console.log(userObject)
+
         axios.post('http://192.168.1.58:4000/user', userObject)
             .then((res) => {
-                if(res.data.status === "created") {
+                if(res.data.status === "Pending") {
                     localStorage.setItem('userName', name);
                     localStorage.setItem('userEmail', email);
                     localStorage.setItem('isLoggedIn', "isLoggedIn")
@@ -44,6 +46,8 @@ function Suscribe() {
             }).catch((error) => {
                 console.log(error)
             });
+        sendConfirmationEmail(name, email, token);
+        
     };
 
 function validateLogin() {
