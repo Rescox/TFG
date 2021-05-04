@@ -3,7 +3,7 @@ import time
 
 
 class QuotesSpider(scrapy.Spider):
-    name = "quotes"
+    name = "news"
     start_urls = [
         'https://www.incibe.es/protege-tu-empresa/avisos-seguridad/filtro/phishing'
     ]
