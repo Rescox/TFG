@@ -4,7 +4,7 @@ import time
 from gophish import Gophish
 from gophish.models import *
 
-api = Gophish("ea2c3b73d56626bcb7e50367e23b1d111966d722cc0ceb29c764df2c260488c3", host='https://127.0.0.1:3333/', verify = False)
+api = Gophish(api = Gophish(APIKEY, host=DirecciónGophishServer, verify = False)
 lastPos = 0
 print("Iniciando listener de plantillas")
 while(True):
@@ -29,7 +29,7 @@ while(True):
                 print("Creada plantilla con el id" + str(template.id) + " y el nombre " + sCreator[0])
                 data[i]['gophish_id'] = template.id
                 data[i]['gophish_profile_id'] = smtp.id
-                r = requests.put('http://192.168.1.58:4000/template/'+data[i]['_id'], json = data[i]) 
+                r = requests.put(URLPlantillas +data[i]['_id'], json = data[i]) 
 
                
                 
