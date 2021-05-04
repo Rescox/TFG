@@ -4,11 +4,11 @@ import time
 from gophish import Gophish
 from gophish.models import *
 
-api = Gophish("ea2c3b73d56626bcb7e50367e23b1d111966d722cc0ceb29c764df2c260488c3", host='https://127.0.0.1:3333/', verify = False)
+api = Gophish(APIKEY, host=DirecciónGophishServer, verify = False)
 lastPos = 0
 print("Iniciando listener de Campañas")
 while(True):
-    with urllib.request.urlopen("http://192.168.1.58:4000/campaign") as url:
+    with urllib.request.urlopen(URLBaseDeDatosCampañas) as url:
         data = json.loads(url.read().decode())
         
         for i in range(lastPos, len(data)):
