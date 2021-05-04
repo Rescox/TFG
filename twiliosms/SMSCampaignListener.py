@@ -32,7 +32,7 @@ class S(BaseHTTPRequestHandler):
 
 def updateSmsState(id, nSms):
     print(id)
-    with urllib.request.urlopen("http://192.168.1.58:4000/sms/details/" + id) as url:
+    with urllib.request.urlopen("URLBackEndCampañaSMS/sms/details/" + id) as url:
         data = json.loads(url.read().decode())
         print(type(data))
         for groups in data: 
