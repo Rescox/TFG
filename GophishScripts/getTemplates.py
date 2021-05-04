@@ -8,7 +8,7 @@ api = Gophish(api = Gophish(APIKEY, host=DirecciónGophishServer, verify = False
 lastPos = 0
 print("Iniciando listener de plantillas")
 while(True):
-    with urllib.request.urlopen("http://192.168.1.58:4000/template") as url:
+    with urllib.request.urlopen(URLPlantillasBackEnd) as url:
         data = json.loads(url.read().decode())
         
         for i in range(lastPos, len(data)):
