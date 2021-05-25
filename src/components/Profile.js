@@ -5,6 +5,7 @@ import { UserContext } from "../context/UserContext";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import  DeleteIcon  from '@material-ui/icons/Delete';
 
+//Componente encargadod e listar todas las campañas creadas, tanto por email como por SMS.
 function Profile() {
     const { userEmail} = useContext(UserContext);   
     const [data, setData] = useState([])  
@@ -29,7 +30,7 @@ function Profile() {
             sortable: true
         },
         {    
-            name: "Number of Peoople",
+            name: "Number of People",
             selector: "number_of_people",
             center: true,
             responsive: true,
@@ -72,7 +73,7 @@ function Profile() {
         sortable: true
     },
     {    
-        name: "Number of people",
+        name: "Number of People",
         selector: "number_of_people",
         sortable: true,
         center: true,
@@ -93,10 +94,9 @@ function Profile() {
         button: true,
     }
 ];
-    
+    //Función encargada de obtener los valores de la campaña para mostrarlos en la tabla con las demás campañas por correo
     const getValuesEmail = data =>{
         const list = []
-
         for (let i = 0; i < data.length; i++) {
             const obj = {}
             obj['id'] = data[i]['_id']
@@ -105,13 +105,12 @@ function Profile() {
             obj['number_of_people'] = data[i]['group'].length;
             list.push(obj)
         }
-        
         setData(list)
     }
 
+    //Función encargada de obtener los valores de la campaña para mostrarlos en la tabla con las demás campañas por SMS
     const getValuesSms = data =>{
         const list = []
-
         for (let i = 0; i < data.length; i++) {
             const obj = {}
             obj['id'] = data[i]['_id']
@@ -120,7 +119,6 @@ function Profile() {
             obj['number_of_people'] = data[i]['group'].length;
             list.push(obj)
         }
-        
         setDataSms(list)
     }
 
@@ -141,18 +139,18 @@ function Profile() {
         })
     }, []);
     
+    //Función encargada de redireccionar a los usuarios en caso de que deseen ver los detalles de una nueva campaña
     const handleChange = (state) => {
         history.push('/Profile/' + state.target.id);
 
-        console.log('Selected Rows: ', state.target.id);
     };
 
     const handleChangeSMS = (state) => {
         history.push('/Profile/sms/' + state.target.id);
 
-        console.log('Selected Rows: ', state.target.id);
     };
 
+    //Función encarga de borrar las campañas en caso de que el usuario así lo desee
     const handleDelete = (state) => {
         var filtered =data.filter(data => data.id !== state.currentTarget.id)
         setData(filtered)
@@ -167,7 +165,7 @@ function Profile() {
     };
 
     const handleDeleteSms = (state) => {
-        var filtered =dataSms.filter(dataSms => dataSms.id != state.currentTarget.id)
+        var filtered =dataSms.filter(dataSms => dataSms.id !== state.currentTarget.id)
         setDataSms(filtered)
         const URL = "http://localhost:4000/sms/" + state.currentTarget.id
         axios.delete(URL)
@@ -184,7 +182,7 @@ function Profile() {
             <DataTable 
                 pagination
                 highlightOnHover 
-                title="Campañas por email" 
+                title="Campaigns with Email" 
                 data={data}
                 columns= {columnsEmail}  
                 Clicked
@@ -193,7 +191,7 @@ function Profile() {
             <DataTable 
                 pagination
                 highlightOnHover 
-                title="Campañas por SMS" 
+                title="Campaigns with SMS" 
                 data={dataSms}
                 columns= {columnsSms}  
                 Clicked

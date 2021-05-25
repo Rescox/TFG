@@ -9,7 +9,7 @@ import 'reactjs-popup/dist/index.css';
 
 
 
-
+//Componente para poder crear plantillas nuevas y añadirla a la cuenta del usuario para poder reutilizarlas en un futuro en sus campañas por email.
 function AddTemplate() {
     
     const [templateName, setTemplateName] = useState([])

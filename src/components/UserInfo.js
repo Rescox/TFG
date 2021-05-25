@@ -3,25 +3,35 @@ import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { UserContext } from "../context/UserContext";
 
 function UserInfo() {
-    const {isLoggedIn, status} = useContext(UserContext);
+    const {isLoggedIn, status, role} = useContext(UserContext);
     var history = useHistory()
-    console.log(isLoggedIn)
     if(isLoggedIn === "isLoggedIn") { 
         if(status === "Active") { 
-            return (
-                <div>
-                    <h2>Phishing by Email</h2>
-                    <div style={styleButtonGroup} className="buttonGroup">
-                        <button style={styleButton} onClick= {() => {history.push('/groupCampaign')}}>Group Campaign</button>
-                        <button style={styleButton} onClick= {() => {history.push('/individualCampaign')}}>Individual Campaign</button>
-                        <button style={styleButton} onClick= {() => {history.push('/template')}}>Add templates</button>
+            if(role === "User") { 
+                return (
+                    <div>
+                        <h2>Phishing by Email</h2>
+                        <div style={styleButtonGroup} className="buttonGroup">
+                            <button style={styleButton} onClick= {() => {history.push('/groupCampaign')}}>Group Campaign</button>
+                            <button style={styleButton} onClick= {() => {history.push('/individualCampaign')}}>Individual Campaign</button>
+                            <button style={styleButton} onClick= {() => {history.push('/template')}}>Add templates</button>
+                        </div>
+                        <h2>Phishing by SMS</h2>
+                        <div style={styleButtonGroup} className="buttonGroup">
+                            <button style={styleButton} onClick= {() => {history.push('/SmsGroupCampaign')}}>Send SMS</button>
+                        </div>     
                     </div>
-                    <h2>Phishing by SMS</h2>
-                    <div style={styleButtonGroup} className="buttonGroup">
-                        <button style={styleButton} onClick= {() => {history.push('/SmsGroupCampaign')}}>Send SMS</button>
-                    </div>     
-                </div>
-            )
+                )
+            } else {
+                return( 
+                    <div>
+                        <h2>Admin panel</h2>
+                        <div style={styleButtonGroup} className="buttonGroup">
+                            <button style={styleButton} onClick= {() => {history.push('/manageProfiles')}}>Manage profiles</button>
+                        </div>
+                    </div>
+                )
+            }
         } else {
             return (
                 <div>

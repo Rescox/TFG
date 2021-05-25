@@ -57,7 +57,7 @@ function validateLogin() {
     return (
         <div style = {styleDiv}>
             <form style = {styleForm}>
-                <h1>Phishing simulator</h1>
+                <h1>MOOPHISH</h1>
                 <label>
                     Name:
                     <input style = {styleInput}
@@ -83,15 +83,6 @@ function validateLogin() {
                         type = "password"
                         onChange={e => setPassword(e.target.value)}
                         value = {password}
-                        required />
-                </label>
-
-                <label>
-                    Accept terms:
-                    <input
-                        name="acceptedTerms"
-                        type="checkbox"
-                        onChange={e => setAcceptedTerms(e.target.value)}
                         required />
                 </label>
                 <button type = "button" style={styleButton} disabled={!validateLogin()} onClick= {HandleSubmit}>Submit</button>

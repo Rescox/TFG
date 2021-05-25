@@ -8,8 +8,9 @@ import  DeleteIcon  from '@material-ui/icons/Delete';
 
 
 
-
+//Componente para poder crear campañas por correo en grupo 
 function AddGroupCampaign() {
+    //Declaración de constantes
     const [data, setData] = useState([])
     const [campaignName, setCampaignName] = useState([])
     const [template, setTemplate] = useState([])
@@ -21,7 +22,7 @@ function AddGroupCampaign() {
     
     var history = useHistory()
 
-
+    //Función para procesar el excel subido y parsearlo a formato legible
     const processData = dataString => {
         const dataStringLines = dataString.split(/\r\n|\n/);
         const headers = dataStringLines[0].split(/,(?![^"]*"(?:(?:[^"]*"){2})*[^"]*$)/);
@@ -53,6 +54,7 @@ function AddGroupCampaign() {
         console.log(newData)
       }
 
+    //Declaración de las columnas que serán vistas en las tablas de usuarios que participen en la campaña
     const columns = [ 
     { 
         name: "First Name",
@@ -78,6 +80,8 @@ function AddGroupCampaign() {
         button: true,
     }
 ];
+
+    //Función para poder borrar usuarios de la campaña en caso de equivocación, etc
     const handleChange = (row) => {
         let index = data.findIndex(x => x['Email'] === row['Email']); 
         let newData = [...data];
@@ -87,7 +91,7 @@ function AddGroupCampaign() {
         console.log(data);
     };
     
-
+    //Función encargada de leer el archivo subido y llamar a la función parseadora
     const handleFileUpload = e => {
         
         const file = e.target.files[0]
@@ -104,6 +108,7 @@ function AddGroupCampaign() {
         reader.readAsBinaryString(file)
     }
 
+    //Filtro que avisará al usuario sobre fallos a la hora de enviar el formulario
     const handleSubmit = e => {
         if (launchDate > endDate) {
             alert("Fecha de lanzamiento mayor que la de finalización");
@@ -138,26 +143,24 @@ function AddGroupCampaign() {
         }
     }
 
-    const handleAddRowSubmit = e => {
-        console.log(newUser)
-        
-       
 
+    //Función encargada de agregar nuevos usuarios a la campaña, así como comprobar que no se introduce ningún usuario vacío
+    const handleAddRowSubmit = e => {
         if(newUser['First Name'] === "" || newUser['Last Name']=== "" || newUser['Email']=== "" || newUser['First Name'] === undefined || newUser['Last Name']=== undefined || newUser['Email']=== undefined) {
             alert("Introduzca todos los campos de usuario");
         } else { 
             const newData = [...data]
             newData.push(newUser)
             setData(newData)
-            console.log(data)
         }
     }
 
+    //Función encargada de cargar las plantillas creadas por el usuario, así como las tres existentes por defecto
     const getTemplates = data =>{
         const list = []
-        list.push({'id':1, 'name':'Twitter-Por Defecto'})
-        list.push({'id':4, 'name':'Google-Por Defecto'})
-        list.push({'id':3, 'name':'Spotify-Por Defecto'})
+        list.push({'id':1, 'name':'Twitter-By Default'})
+        list.push({'id':4, 'name':'Google-By Default'})
+        list.push({'id':3, 'name':'Spotify-By Default'})
         for (let i = 0; i < data.length; i++) {
             if(data[i]['status_usable'] !== false) { 
                 const obj = {}
@@ -171,7 +174,7 @@ function AddGroupCampaign() {
         setTemplateUrl(list)
     }
 
-
+    //Hook de efecto encargado de actualizar el componente, en este caso las plantillas
     useEffect(() => { 
         const url = 'http://localhost:4000/template/'+ userEmail
         axios.get(url)
@@ -183,25 +186,27 @@ function AddGroupCampaign() {
     },[]);
 
 
-
+    //Función encargada de agregar nuevas plantillas a la campaña una vez seleccionadas
     const handleSelect = e => {
         if(template.indexOf(e.target.value) === -1) { 
             setTemplate(template.concat(e.target.value))
             
         }
-        console.log(template)
     }
     
+    //Función encargada de borrar plantillas seleccionadas para la campaña en caso de equiovación
     const handleDeleteSelect = id => {
         const newTemplate = template.filter((item) => item !== id)
         console.log(newTemplate)
         setTemplate(newTemplate)
     }
 
+    //Función encargada de mostrar el nombre de la plantilla en la lista desordenada
     const handleValueLi = e => {
         const obj = JSON.parse(e)
         return obj.name
     }
+
 
     const set = name =>  {
         return ({ target: {value}}) => {

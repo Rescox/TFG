@@ -6,8 +6,7 @@ function About() {
     const { userName } = useContext(UserContext);
     return (
         <div>
-            <p> Trabajo de Fin de Grado desarrollado por Raúl Escribano Corrales </p>
-            <h1>{userName}</h1>
+            <p> Trabajo de Fin de Grado desarrollado por Raúl Escribano Corrales COMPLETAR TITULACION, UNIVERSIDAD Y CORREO</p>
         </div>
     )
 }

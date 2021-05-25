@@ -10,7 +10,7 @@ var cors = require('cors');
 var app = express()
 app.use(cors())
 app.use(bodyParser.json())
-app.listen(4000,()=> console.log("HOLA BUENAS"))
+app.listen(4000,()=> console.log("Working so far"))
 app.use('/campaign', campaignRoutes)
 app.use('/user', userRoutes)
 app.use('/template', templateRoutes)

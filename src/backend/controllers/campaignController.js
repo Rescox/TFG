@@ -69,6 +69,13 @@ router.put('/:id', (req,res)=> {
     })
 })
 
+router.delete('/email/:email', (req,res)=> { 
+    campaign.deleteMany({'creator': req.params.email},(err,docs)=> {
+        if(!err) res.send(docs)
+        else console.log("ERROR en put")
+    })
+})
+
 router.delete('/:id', (req,res)=> {
     if(!ObjectID.isValid(req.params.id))
         return res.status(400).send('No campaign found with that id')

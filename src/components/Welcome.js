@@ -20,7 +20,7 @@ export default class Welcome extends Component{
     render() { 
         return (
             <div>
-                <h1> Bienvenido a Phishing Simulator </h1>
+                <h1> Welcome to MOOPHISH </h1>
                 <UserInfo handleSession = {this.handleSession}/>
             </div>
 

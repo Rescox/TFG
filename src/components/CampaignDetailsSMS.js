@@ -4,6 +4,7 @@ import Chart from "react-apexcharts";
 import axios from 'axios'
 
 
+//Componente para poder ver en detalle una campaña por SMS seleccionada
 function CampaignDetailsSMS(props) {
     const {campaign_id} = props.match.params;
     const [title, setTitle] = useState([])
@@ -33,7 +34,6 @@ function CampaignDetailsSMS(props) {
             }
         }
 
-        console.log(list)
         return Object.values(list)
     }
 
@@ -75,7 +75,6 @@ function CampaignDetailsSMS(props) {
     const columnList = []
     
 
-    //192.168.1.34:3333/api/campaigns/92?api_key=ea2c3b73d56626bcb7e50367e23b1d111966d722cc0ceb29c764df2c260488c3
     
 
     
@@ -83,14 +82,14 @@ function CampaignDetailsSMS(props) {
     useEffect(() => { 
         
         let column1 = { 
-            name: "Nombre",
+            name: "First Name",
             selector: "firstName",
             center: true,
             sortable: true,
         } 
 
         let column2 = {    
-            name: "Apellido",
+            name: "Last Name",
             selector: "lastName",
             center: true,
             sortable: true,  

@@ -5,6 +5,11 @@ var user = mongoose.model('user',
     name: {type: String},
     email: {type: String},
     password: {type: String},
+    role: {
+        type: String, 
+        enum: ['Admin', 'User'],
+        default: 'User'
+    },
     status: {
         type: String, 
         enum: ['Pending', 'Active'],

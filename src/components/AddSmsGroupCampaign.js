@@ -1,4 +1,4 @@
-import React, {useState, useContext, useEffect} from "react"
+import React, {useState, useContext} from "react"
 import DataTable from 'react-data-table-component';
 import * as XLSX from 'xlsx';
 import axios from 'axios'
@@ -8,7 +8,7 @@ import  DeleteIcon  from '@material-ui/icons/Delete';
 
 
 
-
+//Componente para poder crear campañas por SMS en grupo 
 function AddSmsGroupCampaign() {
     const [data, setData] = useState([])
     const [campaignName, setCampaignName] = useState([])
@@ -82,7 +82,7 @@ function AddSmsGroupCampaign() {
     }
 ];
     const handleChange = (row) => {
-        let index = data.findIndex(x => x['Telephone'] == row['Telephone']); 
+        let index = data.findIndex(x => x['Telephone'] === row['Telephone']); 
         let newData = [...data];
         newData.splice(index,1);
         
@@ -170,6 +170,7 @@ function AddSmsGroupCampaign() {
                 </label>
                 <label>
                     SMS Body:
+                    <br/>
                     <textarea rows="20" cols="70" onChange={e => setBody(e.target.value)}  value={body} />
                 </label>
                     <p  style={pHelpStyle}>* Introduzca en esta caja de texto las constantes {fn}  y {ln} para sustituirlo por el nombre y apellidos de cada usuario respectivamente.</p>

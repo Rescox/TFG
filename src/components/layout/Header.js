@@ -12,7 +12,7 @@ function Header(props) {
     if(isLoggedIn === 'notLoggedIn') { 
         return (
             <header style={headerStyle}>
-                <h1 style={headerStyleH1}>PhishingSimulator</h1>
+                <h1 style={headerStyleH1}>MOOPHISH</h1>
                 <div style={divLinkStyle}>
                     <Link style={linkStyle} to="/"> Home </Link> <Link style={linkStyle} to="/login"> Login </Link>  <Link style={linkStyle} to="/register"> Register </Link> <Link style={linkStyle} to="/about"> About </Link> 
                 </div>
@@ -21,7 +21,7 @@ function Header(props) {
     } else {
         return (
             <header style={headerStyle}>
-                <h1 style={headerStyleH1}>PhishingSimulator</h1>
+                <h1 style={headerStyleH1}>MOOPHISH</h1>
                 <div style={divLinkStyle}> 
                     <Link style={linkStyle} to="/"> Home </Link> <Link style={linkStyle} to="/about"> About </Link>  <Link to="/" onClick={props.handleLogout} style={linkStyle }>Logout</Link>  <Link to="/profile"  style={linkStyle }>Profile({userName})</Link>
                 </div>

@@ -6,7 +6,7 @@ import  DeleteIcon  from '@material-ui/icons/Delete';
 
 
 
-
+//Componente para poder crear campañas por correo individuales
 function AddIndividualCampaign() {
     const [campaignName, setCampaignName] = useState([])
     const [firstName, setFirstName] = useState([])
@@ -108,7 +108,6 @@ function AddIndividualCampaign() {
 
     const handleValueLi = e => {
         const obj = JSON.parse(e)
-        console.log(obj.id)
         return obj.name
     }
 

@@ -20,6 +20,7 @@ router.post('/', (req,res)=> {
         name: req.body.name,
         email: req.body.email,
         password: req.body.password,
+        role: 'User',
         status: req.body.status,
         confirmationCode: req.body.token,
         campaign: []
@@ -33,6 +34,8 @@ router.post('/', (req,res)=> {
         else console.log('Errorrr')
     })
 })
+
+
 
 router.post('/login', (req,res)=> {
     let body = req.body;
